@@ -1,12 +1,20 @@
 <template>
-  <NuxtLink
-    class="underline font-medium"
-    :href="firstLesson.path"
-  >
-    Go to first lesson
-  </NuxtLink>
+  <div>adsfsss{{ testim }}</div>
+  <p @click="changeTestim">go to fuckpage</p>
+  <input type="text" v-model="testim" />
 </template>
 
-<script setup lang="ts">
-const firstLesson = await useFirstLesson();
+<script setup lang="ts" >
+useHead({ title: "sssssss" });
+const testim = useState("testim");
+
+const router = useRouter();
+const changeTestim = () => {
+  router.push(`/fuckpage`);
+};
 </script>
+<style>
+input {
+  background: rgb(178, 189, 178);
+}
+</style>

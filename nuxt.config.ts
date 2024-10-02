@@ -1,26 +1,21 @@
-import vsharp from 'vite-plugin-vsharp';
+import vsharp from "vite-plugin-vsharp";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   runtimeConfig: {
-    stripeSecret: '',
-    stripeWebhookSecret: '',
+    stripeSecret: "",
+    stripeWebhookSecret: "",
     public: {
-      stripeKey: '',
+      stripeKey: "",
     },
   },
   nitro: {
     prerender: {
-      routes: ['/landing'],
+      routes: ["/landing"],
     },
   },
   vite: {
     plugins: [vsharp()],
   },
-  modules: [
-    '@nuxtjs/tailwindcss',
-    '@vueuse/nuxt',
-    '@nuxtjs/supabase',
-    '@pinia/nuxt',
-  ],
+  modules: ["@vueuse/nuxt", "@pinia/nuxt", "@nuxtjs/tailwindcss"],
 });
