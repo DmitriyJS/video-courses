@@ -17,5 +17,10 @@ export default defineNuxtConfig({
   vite: {
     plugins: [vsharp()],
   },
-  modules: ["@vueuse/nuxt", "@pinia/nuxt", "@nuxtjs/tailwindcss"],
+  modules: [
+    "@vueuse/nuxt",
+    "@pinia/nuxt",
+    "@nuxtjs/tailwindcss",
+    "@nuxtjs/supabase",
+  ],
 });

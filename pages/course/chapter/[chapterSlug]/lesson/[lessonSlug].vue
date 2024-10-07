@@ -45,33 +45,36 @@ const course = useCourse();
 const route = useRoute();
 
 definePageMeta({
-  middleware({ params }, from) {
-    const course = useCourse();
-    const chapter = course.chapters.find(
-      (chapter) => chapter.slug === params.chapterSlug
-    );
-    if (!chapter)
-      return abortNavigation(
-        createError({
-          statusCode: 404,
-          message: "Chapter not foun11d",
-        })
+  middleware: [
+    function ({ params }, from) {
+      const course = useCourse();
+      const chapter = course.chapters.find(
+        (chapter) => chapter.slug === params.chapterSlug
       );
+      if (!chapter)
+        return abortNavigation(
+          createError({
+            statusCode: 404,
+            message: "Chapter not foun11d",
+          })
+        );
 
-    const lesson = chapter.lessons.find(
-      (lesson) => lesson.slug === params.lessonSlug
-    );
-    if (!lesson) {
-      console.log(8521);
-
-      throw abortNavigation(
-        createError({
-          statusCode: 404,
-          message: "Lesson not found 777555555777",
-        })
+      const lesson = chapter.lessons.find(
+        (lesson) => lesson.slug === params.lessonSlug
       );
-    }
-  },
+      if (!lesson) {
+        console.log(8521);
+
+        throw abortNavigation(
+          createError({
+            statusCode: 404,
+            message: "Lesson not found 777555555777",
+          })
+        );
+      }
+    },
+    "auth",
+  ],
   // validate({ params }) {
   //   const course = useCourse();
   //   const chapter = course.chapters.find(
@@ -97,7 +100,7 @@ definePageMeta({
 });
 
 if (route.params.lessonSlug === "3-typing-component-events") {
-  console.log;
+  // console.log;
   route.params.paramthatdoesnotexistwhoops.capitalizeIsNotAMethod()();
 }
 
