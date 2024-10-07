@@ -1,7 +1,7 @@
 <template>
   <div>adsfsss{{ testim }}</div>
   <p @click="changeTestim">go to fuckpage</p>
-  <input type="text" v-model="testim" />
+  <input type="text" v-model="testim" class="bg-lime-400" />
 </template>
 
 <script setup lang="ts" >

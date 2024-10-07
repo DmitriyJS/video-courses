@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="lesson-slug-mf">
     <p class="mt-0 uppercase font-bold text-slate-400 mb-1">
       Lesson {{ chapter.number }} - {{ lesson.number }}
     </p>
@@ -25,6 +25,10 @@
     <ClientOnly>
       <!-- CientOnly говорит, что нужно рендерить только на клиенте, потому что иначе инфа может быть указанной по умолчанию из-за гидрации -->
       <!-- еще можно файлам которые должны рендериться на клиенте поставить постфикс client. FileName.client.vue -->
+      <!-- <LessonCompleteButton
+        :modelValue="isLessonComplete"
+        @update:modelValue="throw createError('cant update');"
+      /> -->
       <LessonCompleteButton
         :modelValue="isLessonComplete"
         @update:modelValue="toggleComplete"
@@ -40,17 +44,92 @@
 const course = useCourse();
 const route = useRoute();
 
+definePageMeta({
+  middleware({ params }, from) {
+    const course = useCourse();
+    const chapter = course.chapters.find(
+      (chapter) => chapter.slug === params.chapterSlug
+    );
+    if (!chapter)
+      return abortNavigation(
+        createError({
+          statusCode: 404,
+          message: "Chapter not foun11d",
+        })
+      );
+
+    const lesson = chapter.lessons.find(
+      (lesson) => lesson.slug === params.lessonSlug
+    );
+    if (!lesson) {
+      console.log(8521);
+
+      throw abortNavigation(
+        createError({
+          statusCode: 404,
+          message: "Lesson not found 777555555777",
+        })
+      );
+    }
+  },
+  // validate({ params }) {
+  //   const course = useCourse();
+  //   const chapter = course.chapters.find(
+  //     (chapter) => chapter.slug === params.chapterSlug
+  //   );
+  //   if (!chapter)
+  //     return createError({
+  //       statusCode: 404,
+  //       message: "Chapter not foun11d",
+  //     });
+
+  //   const lesson = chapter.lessons.find(
+  //     (lesson) => lesson.slug === params.lessonSlug
+  //   );
+  //   if (!lesson) {
+  //     throw createError({
+  //       statusCode: 404,
+  //       message: "Lesson not found 777555555777",
+  //     });
+  //   }
+  //   return true;
+  // },
+});
+
+if (route.params.lessonSlug === "3-typing-component-events") {
+  console.log;
+  route.params.paramthatdoesnotexistwhoops.capitalizeIsNotAMethod()();
+}
+
 const chapter = computed(() => {
   return course.chapters.find(
     (chapter) => chapter.slug === route.params.chapterSlug
   );
 });
 
+// if (!chapter.value) {
+//   console.log(1231231231);
+
+//   throw createError({
+//     statusCode: 404,
+//     message: "Chapter not found",
+//   });
+// }
+
 const lesson = computed(() => {
   return chapter.value?.lessons.find(
     (lesson) => lesson.slug === route.params.lessonSlug
   );
 });
+
+// if (!lesson.value) {
+//   console.log(1231231231);
+
+//   throw createError({
+//     statusCode: 404,
+//     message: "Lesson not found",
+//   });
+// }
 
 const headTitle = computed(() => {
   return `${lesson.value?.title}`;

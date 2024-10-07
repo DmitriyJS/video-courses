@@ -1,7 +1,8 @@
 <template>
-  <h1>{{ girl.name }}</h1>
-  <h1>{{ girl.bestPart }}</h1>
-  <h2>{{ time }}</h2>
+  <div class="girls-slug-mf">
+    <h1>{{ girl.name || 123 }}</h1>
+    <h1>{{ girl.bestPart || 3123 }}</h1>
+  </div>
 </template>
 
 <script setup>
@@ -10,7 +11,9 @@ const girls = useFuck();
 const time = useTime();
 
 const girl = computed(() => {
-  return girls.find((fuckingGirl) => fuckingGirl.id == route.params.workerId);
+  return girls.find(
+    (fuckingGirl) => fuckingGirl.id == (route.params.workerId || true)
+  );
 });
 
 onMounted(() => {
