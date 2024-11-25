@@ -1,5 +1,6 @@
 <template>
   <div class="all-routes">
+    test
     <NuxtLink :to="route.path" v-for="route in allRoutes">{{
       route.name
     }}</NuxtLink>
