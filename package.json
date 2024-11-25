@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@nuxtjs/supabase": "^1.0.1",
+    "html5-qrcode": "^2.3.8",
     "stripe": "11.10.0"
   },
   "overrides": {
