@@ -1,6 +1,7 @@
 <template>
   <div class="all-routes">
     test
+    <input type="file" class="yahh" accept="image/*" multiple />
     <NuxtLink :to="route.path" v-for="route in allRoutes">{{
       route.name
     }}</NuxtLink>
